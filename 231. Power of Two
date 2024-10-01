@@ -1,0 +1,15 @@
+bool isPowerOfTwo(int n) {
+    long long int expo = 1;
+    while(n >= expo)
+    {
+        if(n == expo)
+        {
+            return true;
+        }
+        else
+        {
+            expo *= 2;
+        }
+    }
+    return false;
+}
