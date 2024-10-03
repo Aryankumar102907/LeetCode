@@ -1,1 +1,24 @@
+//Not optimized solution testrun : 1800ms
+double myPow(double x, int n)
+{
+    double expo = 1;
+    unsigned long long int c = 0;
+    unsigned long long int N = n;
+    if (n == 0 || x == 1)
+    {
+        return 1.0;
+    }
+    else if (n < 0)
+    {
+        x = 1 / x;
+        N = N * (-1);
+    }
+
+    while (c < N)
+    {
+        expo = expo * x;
+        c++;
+    }
+    return expo;
+}
 
