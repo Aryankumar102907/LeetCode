@@ -1,3 +1,35 @@
+\\SINCE 1 AND 7 ARE THE ONLY HAPPY NUMBER OF LENGTH 1
+class Solution {
+public:
+    bool isHappy(int n) {
+        string txt = to_string(n);
+        if(n == 1 || n == 7)
+        {
+            return true;
+        }
+        while(txt.length() > 1)
+        {
+            int sum = 0;
+            int rem = 0;
+            for(int i = 0; i < txt.length(); i++)
+            {
+                rem = n % 10;
+                n = n / 10;
+                sum += pow(rem, 2);
+                rem = n;
+            }
+            txt = to_string(sum);
+            n = sum;
+            if(sum == 1 || sum == 7)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+};
+
+*******************ALTERNATE SOLUTION**********************
 class Solution {
 public:
     bool isHappy(int n) {
