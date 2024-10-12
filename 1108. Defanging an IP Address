@@ -1,0 +1,34 @@
+// Replace with Another String
+
+// The string::replace() method can also be used to replace the multiple characters with a string.
+
+// Syntax
+// str1.replace(first, last, str2)
+
+
+// Parameters
+// str1: The string in which we have to replace the multiple characters.
+// first: Iterator pointing to the starting position of str1 from where we have to replace the multiple characters.
+// last: Iterator pointing to the position just after the last element up to which we have to replace.
+// str2: String by which we have to replace the characters.
+
+// Return Value
+// It return the original string after replacing the multiple characters by another string.
+
+class Solution {
+public:
+    string defangIPaddr(string address) {
+        for(int i = 0; i < address.length(); i++)
+        {
+            if(address[i] == '.')
+            {
+                address.replace(i, 1, "[.]");
+                // i += 1;
+                i += 2;
+            }
+        }
+        return address;
+    }
+};
+
+//alternate approach : string s = "" and then concatenate(+) accordingly!
