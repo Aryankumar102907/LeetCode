@@ -1,0 +1,50 @@
+1 <= n <= 45 
+class Solution {
+public:
+    int fib(int n) {
+        if(n < 2)
+        {
+            return n;
+        }
+        int f0 = 0, f1 = 1, f2 = 0;
+        //int f2 = 0 declaring here made the program slower!
+        for(int i = 2; i <= n; i++)
+        {
+            f2 = f0 + f1;
+            f0 = f1;
+            f1 = f2;
+        }
+        return f2;
+    }
+};
+
+//alternate recursive soln vs iterative soln:
+
+int fib(int n){
+    if(n < 2)
+    {
+        return n;
+    }
+    return fib(n-1) + fib(n-2);
+}
+
+When calculating the Fibonacci sequence, a recursive approach has a time complexity of O(2^n), 
+which is significantly slower than the iterative (without recursion) approach with a time complexity of O(n);
+while both have a space complexity of O(n) due to the stack space used during recursive calls. 
+Key points: 
+Recursive Fibonacci:
+  Time Complexity: O(2^n) - Exponential growth, making it inefficient for large values of n.
+  Space Complexity: O(n) - Stack space proportional to the depth of recursion (which is n).
+Iterative Fibonacci:
+  Time Complexity: O(n) - Linear growth, much faster than recursion for large n.
+  Space Complexity: O(1) - Constant space as only a few variables are needed to store intermediate values.
+
+Explanation: 
+Why recursion is inefficient:
+In a recursive Fibonacci function, to calculate the nth Fibonacci number, it needs to calculate the (n-1)th and (n-2)th numbers, 
+which in turn requires further recursive calls, leading to a large number of redundant calculations. 
+This creates an exponential growth in the number of operations as n increases. 
+
+Iterative approach is better:
+An iterative solution uses a loop to calculate each Fibonacci number based on the previous two values, 
+avoiding the repeated calculations and resulting in a much faster execution time. 
