@@ -1,0 +1,40 @@
+class Solution {
+public:
+    vector<vector<int>> generate(int numRows) {
+        vector<vector<int>> vec;
+        vector<int> v0 = {1}, v1 = {1, 1};
+        vector<int> v2;
+        if(numRows == 1)
+        {
+            vec.push_back(v0);
+            return vec;
+        }
+        else if(numRows == 2)
+        {
+            vec.push_back(v0);
+            vec.push_back(v1);
+            return vec;
+        }
+        vec.push_back(v0);
+        vec.push_back(v1);
+        for(int i = 3; i <= numRows; i++)
+        {
+            for(int j = 0; j <= vec[i-2].size(); j++)
+            {
+                int sum = 0;
+                if(j == 0 || j == vec[i-2].size())
+                {
+                    sum = 1;
+                }
+                else
+                {
+                    sum = vec[i-2][j - 1] + vec[i-2][j];
+                }
+                v2.push_back(sum);
+            }
+            vec.push_back(v2);
+            v2.clear();
+        }
+        return vec;
+    }
+};
