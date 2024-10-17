@@ -1,0 +1,20 @@
+class Solution {
+public:
+    int divisorSubstrings(int num, int k) {
+        string snum = to_string(num);
+        int counter = 0, lim = snum.length() - (k - 1), myint = 0; //if myint is declared here then space complexity is 92%
+        for(int i = 0; i < lim; i++)
+        {
+            // string r = snum.substr(i, k);
+            // if int myint is declared here then space complexity is 53%
+            myint = stoi(snum.substr(i, k));
+            //(num % myint == 0 && myint != 0) sequence in which conditions are applied matters!
+            //first check if myint != 0
+            if(myint != 0 && num % myint == 0)
+            {
+                counter++;
+            }
+        }
+        return counter;
+    }
+};
