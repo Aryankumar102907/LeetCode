@@ -1,0 +1,13 @@
+class Solution {
+public:
+    vector<double> convertTemperature(double celsius) {
+        vector<double> vec;
+        // kelvin = celsius + 273.15
+        celsius = celsius + 273.15;
+        vec.push_back(celsius);
+        // fahrenheit =  kelvin * 9/5 - 459.67
+        celsius =  celsius * 1.8 - 459.67;
+        vec.push_back(celsius);
+        return vec;
+    }
+};
