@@ -1,1 +1,60 @@
-In progress
+Got to revise and relearn a lot of concepts!
+
+a. Separate Result Vector: We use result to avoid modifying code directly while iterating through it.
+Earlier there was an issue with my code because it directly modifies code while iterating through it, which affected subsequent calculations. This turned out to be very problematic because each element
+is updated based on modified values of previous elements instead of the original values. It took me a lot of time to debug this single piece of code.
+code[g] = result;
+
+b. Handling Negative k: We handle negative values of k by summing elements before the current index, accounting for circular indexing with (g - h + size) % size.
+In C++, accessing code[-4] with a vector like code = {2, 4, 9, 3}; will lead to undefined behavior because negative indices are not valid for vectors.
+
+Unlike languages like Python, C++ does not support negative indexing natively in vectors or arrays, which means trying to access an index like -4 will not wrap around to the end of the vector.
+Instead, it will attempt to access a memory location before the start of the vector, likely resulting in a runtime error or potentially corrupting other data.
+If you want to access elements in a circular way, like moving backwards, you can use the modulus operator with positive indices:
+
+int index = (g - 4 + code.size()) % code.size();
+int value = code[index]; // This wraps around correctly within the bounds of the vector
+This approach effectively simulates negative indexing by making sure that the resulting index is within the valid range for the vector.
+
+class Solution {
+public:
+    vector<int> decrypt(vector<int>& code, int k) {
+        vector<int> resultVec;
+        int size = code.size();
+        for(int g = 0; g < size; g++)
+        {
+            int sum = 0;
+            for(int h = 1; h <= abs(k); h++)
+            {
+                if (k > 0)
+                {
+                    sum = sum + code[(g + h) % size];
+                }
+                else if (k < 0)
+                {
+                    sum = sum + code[(g - h + size) % size];
+                }
+            }
+            resultVec.push_back(sum);
+        }
+        return resultVec;
+    }
+};
+
+### Code Analysis
+### Summary
+- **Time Complexity**: \( O(n \times |k|) \)
+- **Space Complexity**: \( O(n) \)
+
+This complexity means the function scales linearly with respect to both the size of `code` and the magnitude of `k`.
+
+Q. Can time complexity O(n×∣k∣) be written as O(n^2)?
+Ans. The time complexity \( O(n \times |k|) \) can only be simplified to \( O(n^2) \) if \( |k| \) is proportional to \( n \). 
+
+Here's how to interpret it:
+
+1. **If \( |k| \) is a constant** (e.g., \( |k| = 3 \) or any other fixed value that doesn’t change with \( n \)), then the time complexity remains **\( O(n) \)**. This is because \( O(n \times |k|) = O(n) \times O(\text{constant}) = O(n) \).
+
+2. **If \( |k| \) scales with \( n \)** (for example, if \( |k| = n \)), then the time complexity becomes \( O(n \times n) = O(n^2) \).
+
+In general, unless the problem specifically states that \( |k| \) grows with \( n \), it’s more accurate to leave the complexity as \( O(n \times |k|) \).
