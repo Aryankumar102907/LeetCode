@@ -1,0 +1,29 @@
+class Solution {
+public:
+    string complexNumberMultiply(string num1, string num2) {
+        size_t plusPos1 = num1.find('+');
+        size_t iPos1 = num1.find('i');
+        
+        size_t plusPos2 = num2.find('+');
+        size_t iPos2 = num2.find('i');
+
+        // Ensure the positions were found; throw an error if not
+        if (plusPos1 == std::string::npos || iPos1 == std::string::npos ||
+            plusPos2 == std::string::npos || iPos2 == std::string::npos) {
+            throw std::invalid_argument("Input string format is incorrect.");
+        }
+
+        int a = std::stoi(num1.substr(0, plusPos1));
+        int b = std::stoi(num1.substr(plusPos1 + 1, iPos1 - plusPos1 - 1));
+
+        int c = std::stoi(num2.substr(0, plusPos2));
+        int d = std::stoi(num2.substr(plusPos2 + 1, iPos2 - plusPos2 - 1));
+
+        // Calculate the real and imaginary parts of the result
+        int real = a * c - b * d;
+        int imag = a * d + b * c;
+
+        // Return the result in the format "real+imagi"
+        return std::to_string(real) + "+" + std::to_string(imag) + "i";
+    }
+};
