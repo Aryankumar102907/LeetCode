@@ -1,1 +1,20 @@
-
+class Solution {
+public:
+    bool isCircularSentence(string sentence) {
+        int length = sentence.size();
+        if (sentence.at(0) != sentence.at(length - 1))
+        {
+            return false;
+        }
+        size_t found = sentence.find(' ');
+        while (found != string::npos)
+        {
+            if (found > 0 && found + 1 < length && sentence.at(found - 1) != sentence.at(found + 1))
+            {
+                return false;
+            }
+            found = sentence.find(' ', found + 1);
+        }
+        return true;
+    }
+};
