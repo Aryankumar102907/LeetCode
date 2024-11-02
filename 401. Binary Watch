@@ -1,0 +1,52 @@
+//The __builtin_popcount() function is a built-in function in GCC and Clang compilers that counts the number of set bits (bits with a value of 1) in an integer.
+
+
+//C++ Ternary or Conditional Operator
+Last Updated : 31 Jul, 2023
+In C++, the ternary or conditional operator ( ? : ) is the shortest form of writing conditional statements. It can be used as an inline conditional statement in place of if-else to execute some conditional code.
+
+Syntax of Ternary Operator ( ? : )
+The syntax of the ternary (or conditional) operator is:
+
+expression ? statement_1 : statement_2;
+
+As the name suggests, the ternary operator works on three operands where
+
+expression: Condition to be evaluated.
+statement_1: Statement that will be executed if the expression evaluates to true.
+statement_2: Code to be executed if the expression evaluates to false.
+// image
+
+The above statement of the ternary operator is equivalent to the if-else statement given below:
+
+if ( condition ) {
+    statement1;
+}
+else {
+    statement2;
+}
+===============================================================================================
+class Solution {
+public:
+    vector<string> readBinaryWatch(int turnedOn) {
+        vector<string> binClk;
+        if(turnedOn > 8)
+        {
+            return {};
+        }
+        for(int i = 0; i <= 11; i++)
+        {
+            for(int j = 0; j <= 59; j++)
+            {
+                int countH = __builtin_popcount(i);
+                int countM = __builtin_popcount(j);
+                if(countH + countM == turnedOn)
+                {
+                    string time = to_string(i) + ":" + (j < 10 ? "0" : "") + to_string(j);
+                    binClk.push_back(time);
+                }
+            }
+        }
+        return binClk;
+    }
+};
