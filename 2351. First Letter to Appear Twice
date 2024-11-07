@@ -36,6 +36,19 @@ public:
 };
 
 ExtrAA
+        //set:
+        // 1. unordered_set
+        // Definition: unordered_set is a collection of unique elements. Each element is stored only once, without any association to other values.
+        // Usage: Primarily used when you need to check for the presence or absence of elements (e.g., checking if an item is in a collection) without
+        //needing to store any additional information about each element.
+        // Key Characteristics:
+        // Only stores keys (no associated values).
+        // Does not allow duplicate entries.
+        // Provides O(1) average-time complexity for insertion, deletion, and lookup.
+
+        Using unordered_set would not work because:
+        1. unordered_set only stores keys (characters), not values (frequency counts).
+        2. You cannot associate a count with each character using unordered_set.
 =================================================================================================================================
 Let's go through the code execution step-by-step with the input `"abccbaacz"` and see where it identifies the repeated character.
 
