@@ -1,0 +1,72 @@
+class Solution {
+public:
+    int firstUniqChar(string s) {
+        unordered_map<char ,int> mp;
+        for(int i = 0; i < s.size(); i++)
+        {
+            int count = 0;
+            char str = s[i];
+            size_t found = s.find(str);
+            while(found != string::npos)
+            {
+                count++;
+                found = s.find(str, found + 1);
+                if(count > 1)
+                {
+                    break;
+                }
+            }
+            mp[str] = count;
+            // mp.insert({s[i], i});
+            if(mp.at(s[i]) == 1)
+            {
+                return i;
+            }
+        }
+        return -1;
+    }
+};
+ExtrAA(SET vs MAP)
+=====================================================================================================================================================================================================================
+Q) difference between unordered_set and unordered_map? why unordered_set cannot be used in this question?
+ANS:
+The primary difference between `unordered_set` and `unordered_map` in C++ lies in their structure and intended use:
+
+### 1. `unordered_set`
+- **Definition**: `unordered_set` is a collection of unique elements. Each element is stored only once, without any association to other values.
+- **Usage**: Primarily used when you need to check for the presence or absence of elements (e.g., checking if an item is in a collection) without 
+needing to store any additional information about each element.
+- **Key Characteristics**:
+  - Only stores **keys** (no associated values).
+  - Does **not** allow duplicate entries.
+  - Provides **O(1)** average-time complexity for insertion, deletion, and lookup.
+
+### 2. `unordered_map`
+- **Definition**: `unordered_map` is a collection of key-value pairs, where each key is associated with a specific value.
+- **Usage**: Used when you need to store and access data based on a key, especially when you need to associate additional information (e.g., counts or indices) with each key.
+- **Key Characteristics**:
+  - Stores both **keys** and **values**.
+  - Does **not** allow duplicate keys, but values associated with keys can be updated.
+  - Provides **O(1)** average-time complexity for insertion, deletion, and lookup.
+
+### Why `unordered_set` Cannot Be Used in This Question
+In this question, you need to **track the frequency (count) of each character** in the string. `unordered_map` is suitable here because it allows you to store each character 
+(as the key) along with its frequency (as the value). This makes it easy to look up how many times each character appears.
+
+Using `unordered_set` would not work because:
+- `unordered_set` only stores keys (characters), not values (frequency counts).
+- You cannot associate a count with each character using `unordered_set`.
+
+Therefore, `unordered_map` is necessary for problems that require storing extra information alongside each unique element.
+=====================================================================================================================================================================================================================
+Easy Implementaion by ChatGPT:
+int firstUniqChar(string s) {
+    unordered_map<char, int> mp;
+
+    for (char c : s) mp[c]++;
+    for (int i = 0; i < s.size(); i++) {
+        if (mp[s[i]] == 1) return i;
+    }
+
+    return -1;
+}
