@@ -1,0 +1,33 @@
+class Solution {
+public:
+    void setZeroes(vector<vector<int>>& matrix) {
+        int m_lim = matrix.size();
+        int n_lim = matrix[0].size();
+        unordered_set<int> setR;
+        unordered_set<int> setC; 
+        for(int m = 0; m < m_lim; m++)
+        {
+            for(int n = 0; n < n_lim; n++)
+            {
+                if(matrix[m][n] == 0)
+                {
+                    setR.insert(m);
+                    setC.insert(n);
+                }
+            }
+        }
+
+        for(int m = 0; m < matrix.size(); m++)
+        {
+            for(int n = 0; n < matrix[0].size(); n++)
+            {
+                if(setR.count(m) > 0 || setC.count(n) > 0)
+                {
+                    matrix[m][n] = 0;
+                }
+            }
+        }
+    }
+};
+
+//Taken help from: Vishal Gupta
