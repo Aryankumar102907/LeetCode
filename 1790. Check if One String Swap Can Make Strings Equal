@@ -1,0 +1,73 @@
+// class Solution {
+// public:
+//     bool areAlmostEqual(string s1, string s2) {
+//         unordered_multimap<char, int> map1;
+//         unordered_multimap<char, int> map2;
+//         if(s1 == s2)
+//         {
+//             return true;
+//         }
+//         int count = 0;
+//         for(int i = 0; i < s1.length(); i++)
+//         {
+//             if(s1[i] != s2[i])
+//             {
+//                 map1.insert({s1[i], i});
+//                 map2.insert({s2[i], i});
+//                 count++;
+//                 if(count > 2)
+//                 {
+//                     return false;
+//                 }
+//             }
+//         }
+
+//         //Easy & Understandable
+//         // Ensure there are exactly two mismatches
+//         if (count != 2) {
+//             return false;
+//         }
+
+//         // Retrieve mismatched characters and their positions
+//         char s1_first_char = map1.begin()->first;
+//         char s1_second_char = std::next(map1.begin())->first;
+
+//         char s2_first_char = map2.begin()->first;
+//         char s2_second_char = std::next(map2.begin())->first;
+
+//         // Check if swapping makes the strings equal
+//         return (s1_first_char == s2_second_char && s1_second_char == s2_first_char);
+
+//         //GPT Generated
+//         // // Retrieve mismatched pairs from maps
+//         // auto it1 = map1.begin();
+//         // auto it2 = map2.begin();
+
+//         // // Check if swapping makes the strings equal
+//         // return (it1->first == (++it2)->first && (++it1)->first == map2.begin()->first);
+//     }
+// };
+class Solution {
+public:
+    bool areAlmostEqual(string s1, string s2) {
+        // If the strings are already equal
+        if (s1 == s2) return true;
+
+        // Store indices where characters are different
+        vector<int> diffIndices;
+        for (int i = 0; i < s1.size(); ++i) {
+            if (s1[i] != s2[i]) {
+                diffIndices.push_back(i);
+            }
+        }
+
+        // If there are not exactly two differences, it's impossible to swap and make them equal
+        if (diffIndices.size() != 2) return false;
+
+        // Swap characters at the two differing indices in either string and check if they become equal
+        int i = diffIndices[0], j = diffIndices[1];
+        swap(s1[i], s1[j]);
+
+        return s1 == s2;
+    }
+};
