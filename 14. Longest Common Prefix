@@ -1,0 +1,59 @@
+class Solution {
+public:
+    string longestCommonPrefix(vector<string>& strs) {
+        //Approach 1
+        if (strs.empty())
+        {
+            return "";
+        }
+        string check = strs[0];
+        for(int i = 1; i < strs.size(); i++)
+        {
+            int j = 0;
+            while (j < check.length() && j < strs[i].length() && strs[i][j] == check[j])
+            {
+                j++;
+            }
+            check = check.substr(0, j);
+        }
+        if(check.empty())
+        {
+            return "";
+        }
+        return check;
+    }
+};
+=============================================================================================================
+ExtrAA
+
+Substring in C++:
+The substring function takes two values pos and len as an argument and returns a newly constructed string object with its value initialized to a copy of a sub-string of this object.
+Copying of string starts from pos and is done till pos+len means [pos, pos+len).
+
+Syntax: 
+
+string substr (size_t pos, size_t len) const;
+Parameters:
+
+pos: Index of the first character to be copied.
+len: Length of the sub-string.
+size_t: It is an unsigned integral type.
+Return Value: It returns a string object.
+======================================================================================================================
+if we write: –
+s.substr(s.begin(),3)  => compilation error 🙂  (because cannnot convert a iterator to a int datatype )
+
+Important Points to Remember
+The index of the first character is 0 (not 1).
+If pos is equal to the string length, the function returns an empty string.
+If pos is greater than the string length, it throws out_of_range. If this happens, there are no changes in the string.
+If the requested sub-string len is greater than the size of a string, then returned sub-string is [pos, size()).
+If len is not passed as a parameter, then returned sub-string is [pos, size()).
+
+Applications of Substring
+Get a Sub-String after a character
+Get a Sub-String before a character
+Print all Sub-Strings of a given String
+Sum of all Substrings of a string representing a number
+Print the maximum value of all substrings of a string representing a number
+Print the minimum value of all substrings of a string representing a number
