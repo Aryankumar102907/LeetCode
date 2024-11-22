@@ -25,4 +25,4 @@ public:
     }
 };
 =============================================================
-Implement other solution using target - number and finding the resultant number in the hash map table for O(n) solution.
+Implement other solution using target - number and finding the resultant number in the hash map table for O(n) solution!
