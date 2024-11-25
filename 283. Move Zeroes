@@ -9,6 +9,7 @@ public:
         // Move all elements, zeroes naturally get shifted to the back
         for (int i = 0; i < n; i++) {
             if (nums[i] != 0) {
+                // swap 0th index element with that number which is non-zero.
                 swap(nums[j], nums[i]);
                 j++;
             }
