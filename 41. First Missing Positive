@@ -2,6 +2,8 @@ class Solution {
 public:
     int firstMissingPositive(vector<int>& nums) {
         sort(nums.begin(), nums.end());
+        //Smallest missing number is 1.
+        //If 1 is absent from the list then it is the smallest missing number.
         if (find(nums.begin(), nums.end(), 1) == nums.end())
         {
             return 1;
