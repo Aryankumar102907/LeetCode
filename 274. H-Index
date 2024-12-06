@@ -1,0 +1,17 @@
+class Solution {
+public:
+    int hIndex(vector<int>& c) {
+        int s = c.size();
+        //Method to sort in descending order
+        sort(c.begin(), c.end(), greater<>());
+        for(int i = 0; i < cs; i++)
+        {
+            if(c[i] < i+1)
+            {
+                return i;
+            }
+        }
+        return s;
+    }
+
+};
