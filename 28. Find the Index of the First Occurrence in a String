@@ -9,3 +9,9 @@ public:
         return res;
     }
 };
+========================================================================
+The issue lies in how you're updating the res variable within the while loop. The s.find(sub, res + 1) function starts searching for the substring sub beginning from index res + 1.
+Initially, res is 0, and res + 1 becomes 1. This skips the first occurrence of the substring if it starts at index 0.
+Key Changes:
+1. Using size_t for res: Since std::string::find returns size_t, matching the data type avoids potential type mismatch issues.
+2. Initializing res to -1: This ensures the first call to find starts from index 0, as -1 + 1 = 0.
