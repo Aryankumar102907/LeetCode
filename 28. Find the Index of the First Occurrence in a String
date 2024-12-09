@@ -1,0 +1,11 @@
+class Solution {
+public:
+    int strStr(string haystack, string needle) {
+        size_t res = -1;
+        while ((res = haystack.find(needle, res + 1)) != string::npos)
+        {
+            break;
+        }
+        return res;
+    }
+};
