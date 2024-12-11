@@ -1,0 +1,88 @@
+class Solution {
+public:
+    int splitNum(int num) {
+        vector<int> v;
+        // while(num) v.push_back(num % 10), num /= 10;
+        while(num)
+        {
+            v.push_back(num % 10);
+            num /= 10;
+        }
+        sort(v.begin(), v.end());
+        int n = v.size(), i = 0, a = 0, b = 0;
+        
+        for(int i=0; i<n; i += 2)
+        {
+            a = a * 10 + v[i];
+        }
+        for(int i=1; i<n; i += 2)
+        {
+            b = b * 10 + v[i];
+        }
+        return b + a;
+    }
+};
+=========================================================
+ExtrAA
+
+The use of a **comma** instead of a **semicolon** in the line:
+
+```cpp
+while (num) v.push_back(num % 10), num /= 10;
+```
+
+is an example of the **comma operator** in C++.
+
+---
+
+### Explanation of the Comma Operator
+1. **Purpose**:
+   - The comma operator evaluates multiple expressions sequentially and returns the value of the last expression.
+
+2. **How It Works**:
+   - In the above example, the line:
+     ```cpp
+     v.push_back(num % 10), num /= 10;
+     ```
+     is equivalent to:
+     ```cpp
+     v.push_back(num % 10);
+     num /= 10;
+     ```
+   - The **comma operator** allows the two statements to be combined into one line, making the code more compact.
+
+3. **Execution Order**:
+   - `v.push_back(num % 10)` is executed first.
+   - `num /= 10` is executed next.
+   - The entire expression evaluates to the result of the last operation (`num /= 10`), but since it’s in a loop and its value isn’t used, that’s irrelevant.
+
+---
+
+### Why Use a Comma Instead of a Semicolon?
+- **Semicolon (`;`)**:
+  - Separates **statements**. 
+  - Requires two separate lines or statements in the block.
+
+- **Comma (` , `)**:
+  - Combines **expressions** into a single statement.
+  - Useful for compactness and simplicity, especially in loops or conditions.
+
+---
+
+### Equivalent Code Without the Comma:
+If you want to avoid the comma operator for clarity, you can rewrite it as:
+
+```cpp
+while (num) {
+    v.push_back(num % 10);
+    num /= 10;
+}
+```
+
+Both versions achieve the same result, but the comma operator is often used in competitive programming for brevity. 
+
+---
+
+### When to Use Each?
+- Use **semicolon** for clarity, especially in longer code blocks or for beginners.
+- Use **comma** for compactness in short, simple expressions where the intent is clear.
