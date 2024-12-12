@@ -1,0 +1,107 @@
+//Monotonic Stack
+class Solution {
+public:
+    vector<int> asteroidCollision(vector<int>& a) {
+        stack<int> st;
+        vector<int> vec;
+
+        for (int i = 0; i < a.size(); i++) {
+            if (st.empty() || a[i] > 0) {
+                // Push positive asteroid or any asteroid into an empty stack
+                st.push(a[i]);
+            } else {
+                // Handle collision for negative asteroid
+                while (!st.empty() && st.top() > 0 && abs(a[i]) > st.top()) {
+                    st.pop(); // Top asteroid is destroyed
+                }
+
+                if (st.empty() || st.top() < 0) {
+                    // No collision or the top asteroid is also negative
+                    st.push(a[i]);
+                } else if (st.top() == abs(a[i])) {
+                    // Both asteroids destroy each other
+                    st.pop();
+                }
+            }
+        }
+
+        // Transfer stack elements to vector and reverse
+        while (!st.empty()) {
+            vec.push_back(st.top());
+            st.pop();
+        }
+        reverse(vec.begin(), vec.end());
+
+        return vec;
+    }
+};
+===========================================================================================
+ExtrAA
+
+GPT approach:
+class Solution {
+public:
+    vector<int> asteroidCollision(vector<int>& asteroids) {
+        vector<int> result;
+
+        for (int asteroid : asteroids) {
+            bool destroyed = false;
+
+            // Handle collisions only when the current asteroid is negative
+            while (!result.empty() && asteroid < 0 && result.back() > 0) {
+                if (abs(asteroid) > result.back()) {
+                    // Destroy the top of the result vector
+                    result.pop_back();
+                } else if (abs(asteroid) == result.back()) {
+                    // Both asteroids destroy each other
+                    result.pop_back();
+                    destroyed = true;
+                    break;
+                } else {
+                    // The current asteroid is destroyed
+                    destroyed = true;
+                    break;
+                }
+            }
+
+            if (!destroyed) {
+                // If the current asteroid survives, add it to the result
+                result.push_back(asteroid);
+            }
+        }
+
+        return result;
+    }
+};
+========================================================================================
+//Wrong Approach
+
+// class Solution {
+// public:
+//     vector<int> asteroidCollision(vector<int>& a) {
+//         for (int i = 1; i < a.size(); i++)
+//         {
+//             // n = i;
+//             if (i >= 1 && a[i] < 0)
+//             {
+//                 if (a[i - 1] > abs(a[i]))
+//                 {
+//                     a.erase(a.begin() + i);
+//                     i--;
+//                 }
+//                 else if(a[i - 1] < abs(a[i]))
+//                 {
+//                     a[i - 1] = a[i];
+//                     a.erase(a.begin() + i);
+//                     i--;
+//                 }
+//                 else if (a[i - 1] == abs(a[i]))
+//                 {
+//                     a.erase(a.begin() + i);
+//                     a.erase(a.begin() + i - 1);
+//                 }
+//             }
+//         }
+//         return a;
+//     }
+// };
