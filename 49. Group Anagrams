@@ -1,0 +1,22 @@
+class Solution {
+public:
+    vector<vector<string>> groupAnagrams(vector<string>& s) {
+        vector<vector<string>> ans;
+        unordered_map<string, vector<string>> umap;
+        for(auto x : s)
+        {
+            string temp = x;
+            sort(x.begin(), x.end());
+            umap[x].emplace_back(temp);
+        }
+        for(auto x : umap)
+        {
+            vector<string>temp = x.second;
+            ans.emplace_back(temp);
+        }
+        return ans;
+    }
+};
+
+Time Complexity: O(m*n*logm)
+Space Complexity: O(m*n)
