@@ -1,0 +1,34 @@
+class Solution {
+public:
+    int subarraySum(vector<int>& nums, int k) {
+        //HelloWOrld - Prince Agarwal
+        unordered_map <int, int> prevSum;
+        int count = 0, sum = 0;
+        for(int i = 0 ; i < nums.size(); i++)
+        {
+            sum = sum + nums[i];
+            if(sum == k)
+            {
+                count++;
+            }
+            if(prevSum.find(sum - k) != prevSum.end())
+            {
+                count = count + prevSum[sum - k];
+            }
+            prevSum[sum]++;
+        }
+        return count;
+        //Striver!
+        // unordered_map<int, int> mp;
+        // mp[0] = 1;   //important step!
+        // int preSum = 0, cnt = 0;
+        // for(int i = 0; i < nums.size(); i++)
+        // {
+        //     preSum += nums[i];
+        //     int remove = preSum - k;
+        //     cnt += mp[remove];
+        //     mp[preSum] += 1;
+        // }
+        // return cnt;
+    }
+};
