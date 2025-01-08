@@ -1,0 +1,24 @@
+class Solution {
+public:
+    int triangleNumber(vector<int>& nums) {
+        sort(nums.begin(), nums.end());
+        int count = 0;
+        for(int g = nums.size() - 1; g >= 2; g--) //assume the last element to be graetest all the time after sorting.
+        {
+            int  start = 0 , preEnd = g - 1;
+            while(start < preEnd)
+            {
+                if(nums[start] + nums[preEnd] > nums[g])
+                {
+                    count += preEnd - start;
+                    preEnd--;
+                }
+                else
+                {
+                    start++;
+                }
+            }
+        }
+        return count;
+    }
+};
