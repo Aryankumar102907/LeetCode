@@ -1,0 +1,54 @@
+class Solution {
+public:
+    int lengthOfLongestSubstring(string s) {
+        vector<bool> visited(128,false);
+        int  l = 0, r = 0, maxi = 0;
+        while(r < s.size())
+        {
+            while(visited[s[r]])
+            {
+                visited[s[l]] = false;
+                l++;
+            }
+            visited[s[r]] = true;
+            maxi = max(maxi, r - l + 1);
+            r++;
+        }
+        return maxi;
+    }
+};
+====================================================
+ExtrAA
+Key Changes in this code:
+class Solution {
+public:
+    int lengthOfLongestSubstring(string s) {
+        vector<bool> visited(26,false);
+        int  l = 0, r = 0, maxi = INT_MIN; 
+        while(r < s.size())
+        {
+            while(visited[s[r] - 'a'] == true)
+            {
+                visited[s[l] - 'a'] = false;
+                l++;
+            }
+            visited[s[r] - 'a'] = true;
+            maxi = max(maxi, r - l + 1);
+            r++;
+        }
+        return maxi;
+    }
+};
+
+0 <= s.length <= 5 * 104
+s consists of English letters, digits, symbols and spaces.
+
+
+ASCII Range Handling:
+Changed visited to size 128 to accommodate all standard ASCII characters, including spaces, digits, and symbols.
+
+Edge Case for Empty String:
+Initialized maxi to 0 instead of INT_MIN to handle the edge case when the string is empty (s.size() == 0).
+
+Clarity in Logic:
+Retained the same sliding window logic but ensured compatibility with all possible characters.
