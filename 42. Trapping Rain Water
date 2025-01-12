@@ -1,0 +1,24 @@
+class Solution {
+public:
+    int trap(vector<int>& h) {
+        int totalWater = 0;
+        int lmax = 0, rmax = 0;
+        int i = 0, j = h.size() - 1;
+        while(i < j)
+        {
+            lmax = max(lmax, h[i]);
+            rmax = max(rmax, h[j]);
+            if(h[i] < h[j])
+            {
+                totalWater += lmax - h[i];
+                i++;
+            }
+            else
+            {
+                totalWater += rmax - h[j];
+                j--;
+            }
+        }
+        return totalWater;
+    }
+};
